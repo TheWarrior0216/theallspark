@@ -29,3 +29,8 @@ CREATE TABLE ingredient(
   recipeId INT NOT NULL,
   Foreign Key (recipeId) REFERENCES recipe (id) ON DELETE CASCADE
 )
+
+Select recipe.*,
+accounts.*
+FROM recipe
+    JOIN accounts ON accounts.id = recipe.creatorId
