@@ -13,12 +13,14 @@ CREATE TABLE recipe(
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
   title VARCHAR(255) NOT NULL ,
-  instruction VARCHAR(5000) NOT NULL,
+  instructions VARCHAR(5000) NOT NULL,
   img VARCHAR(1000) NOT NULL,
-  category ENUM('breakfast','lunch','dinner', 'snack', 'dessert') NOT NULL DEFAULT 'snack',
+  category ENUM("breakfast","lunch","dinner", "snack", "dessert") NOT NULL DEFAULT "snack",
   creatorId VARCHAR(255) NOT NULL,
   FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
 )
+
+DROP TABLE recipe
 
 CREATE TABLE ingredient(
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -27,10 +29,27 @@ CREATE TABLE ingredient(
   name VARCHAR(255) NOT NULL,
   quantity VARCHAR(255) NOT NULL,
   recipeId INT NOT NULL,
-  Foreign Key (recipeId) REFERENCES recipe (id) ON DELETE CASCADE
+  Foreign Key (recipeId) REFERENCES recipes (id) ON DELETE CASCADE
 )
 
-Select recipe.*,
-accounts.*
+Insert Into
+    recipe (
+        title,
+        instruction,
+        img,
+        category,
+        creatorId
+    )
+VALUES (
+        'Hello',
+        'somestuff',
+        'idk',
+        'breakfast',
+        'idk'
+    );
+
+Select recipe.*, accounts.*
 FROM recipe
     JOIN accounts ON accounts.id = recipe.creatorId
+WHERE
+    recipe.id = LAST_INSERT_ID();

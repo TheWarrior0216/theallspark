@@ -14,8 +14,8 @@ public class RecipeRepository
   {
     string sql = @"
 Insert Into 
-recipe(title, instruction, img, category, creatorId,)
-VALUES(@Title, @Instruction, @Img, @Category, @CreatorId)
+recipe(title, instructions, img, category, creatorId)
+VALUES(@Title, @Instructions, @Img, @Category, @CreatorId);
 
 Select
 recipe.*,
@@ -23,7 +23,7 @@ accounts.*
 FROM recipe
 JOIN accounts ON accounts.id = recipe.creatorId
 WHERE recipe.id = LAST_INSERT_ID();";
-    Recipe recipe = _db.Query<Recipe, Account, Recipe>(sql, (Recipe recipe, Account profile) =>
+    Recipe recipe = _db.Query<Recipe, Account, Recipe>(sql, (recipe, profile) =>
     {
       recipe.Creator = profile;
       return recipe;

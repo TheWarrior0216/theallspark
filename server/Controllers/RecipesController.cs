@@ -1,14 +1,14 @@
 namespace theallspark.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
-public class AlbumsController : ControllerBase
+[Route("api/recipes")]
+public class RecipesController : ControllerBase
 {
 
   private readonly Auth0Provider _auth0provider;
   private readonly RecipeService _recipeService;
 
-  public AlbumsController(Auth0Provider auth0provider, RecipeService recipeService)
+  public RecipesController(Auth0Provider auth0provider, RecipeService recipeService)
   {
     _auth0provider = auth0provider;
     _recipeService = recipeService;
