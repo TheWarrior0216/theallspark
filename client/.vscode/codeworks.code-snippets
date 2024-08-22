@@ -30,5 +30,19 @@
       "}"
     ],
     "scope": "javascript,typescript,javascriptreact,typescriptreact"
-  }
+  },
+  "Try Catch with BadRequest": {
+    "prefix": "trycatch:badrequest",
+    "scope": "csharp",
+    "body": [
+      "try ",
+      "{",
+      "${0}",
+      "}",
+      "catch (Exception exception)",
+      "{",
+      "  return BadRequest(exception.Message);",
+      "}",
+    ]
+  },
 }

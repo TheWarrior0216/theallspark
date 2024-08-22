@@ -20,7 +20,7 @@ CREATE TABLE recipe(
   FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
 )
 
-DROP TABLE recipe
+DROP TABLE ingredient
 
 CREATE TABLE ingredient(
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -28,8 +28,18 @@ CREATE TABLE ingredient(
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
   name VARCHAR(255) NOT NULL,
   quantity VARCHAR(255) NOT NULL,
+  recipeId INT NOT NULL
+)
+
+CREATE TABLE favorite(
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   recipeId INT NOT NULL,
-  Foreign Key (recipeId) REFERENCES recipes (id) ON DELETE CASCADE
+  accountId varchar(255) NOT NULL,
+  FOREIGN KEY (recipeId) REFERENCES recipe (id) ON DELETE CASCADE,
+  FOREIGN KEY (accountId) REFERENCES accounts (id) ON DELETE CASCADE,
+  UNIQUE (recipeId, accountId)
 )
 
 Insert Into
@@ -48,8 +58,6 @@ VALUES (
         'idk'
     );
 
-Select recipe.*, accounts.*
-FROM recipe
-    JOIN accounts ON accounts.id = recipe.creatorId
-WHERE
-    recipe.id = LAST_INSERT_ID();
+SELECT *
+FROM ingredient
+WHERE id = LAST_INSERT_ID();
