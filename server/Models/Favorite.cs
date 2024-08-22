@@ -8,6 +8,7 @@ public class Favorite
   public int RecipeId { get; set; }
   public Recipe Recipe { get; set; }
   public string AccountId { get; set; }
+  public Account Creator { get; set; }
 }
 public class FavoriteRecipe : Recipe
 {

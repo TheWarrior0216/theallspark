@@ -58,6 +58,10 @@ VALUES (
         'idk'
     );
 
-SELECT *
-FROM ingredient
-WHERE id = LAST_INSERT_ID();
+SELECT favorite.*, recipe.*, accounts.*
+FROM
+    favorite
+    JOIN recipe ON favorite.recipeId = recipe.id
+    JOIN accounts ON accounts.Id = favorite.accountId
+WHERE
+    favorite.id = LAST_INSERT_ID();
